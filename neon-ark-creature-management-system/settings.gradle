@@ -1,0 +1,4 @@
+rootProject.name = 'neon-ark-creature-management-system'
+
+include 'neon-ark-backend'
+include 'neon-ark-cli'
