@@ -21,6 +21,8 @@ public class FeedingService {
         this.feedingRepo = feedingRepo;
     }
 
+    // Finds all creatures that must be fed at the specified time.
+    // Includes validation for time format and existence of results.
     public List<FeedingCreatureResponse> findCreaturesToFeedAt(String timeStr) {
         if (timeStr == null || timeStr.isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Time query parameter is required (HH:MM).");

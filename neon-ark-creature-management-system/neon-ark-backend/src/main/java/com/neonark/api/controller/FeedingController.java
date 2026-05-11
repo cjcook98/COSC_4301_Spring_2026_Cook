@@ -17,6 +17,7 @@ public class FeedingController {
         this.service = service;
     }
 
+    // Finds all creatures scheduled to be fed at the specified time
     @GetMapping
     public List<FeedingCreatureResponse> findByTime(@RequestParam String time) {
         return service.findCreaturesToFeedAt(time);

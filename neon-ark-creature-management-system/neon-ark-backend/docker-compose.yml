@@ -1,24 +1,37 @@
-version: "3.8"
+version: "3.8" # Docker compose file format version
 
 services:
 
   postgres-db:
+    # Name of the running container (makes logs & commands easier to use)
     container_name: neon_ark_creature_db
+
+    # Official PostgreSQL 16 image from Docker Hub
     image: postgres:16
+
+    # Automatically restart the container if it stops or on system reboot
     restart: always
 
     environment:
+      # Credentials and database name used by Spring Boot
       POSTGRES_USER: neonark
       POSTGRES_PASSWORD: neonarkpass
       POSTGRES_DB: neonark_creatures
+
+      # Ensures PostgreSQL requires password authentication
       POSTGRES_HOST_AUTH_METHOD: password
 
     ports:
+      # Maps host port 5436 -> container port 5432 (Postgres default)
+      # Allows Spring Boot app to connect via localhost:5436
       - "5436:5432"
 
     volumes:
+      # Persistent storage for PostgreSQL data
+      # Prevents data loss when the container restarts
       - neonark_creature_pgdata:/var/lib/postgresql/dat
 
 volumes:
+  # Named Docker volume used to persist database files
   neonark_creature_pgdata:
     driver: local

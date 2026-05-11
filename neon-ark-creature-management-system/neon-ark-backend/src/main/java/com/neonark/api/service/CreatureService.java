@@ -32,6 +32,9 @@ public class CreatureService {
         this.feedingRepo = feedingRepo;
     }
 
+    // Creates a new creature after validating habitat existence
+    // and enforcing the uniqueness rule (no duplicate names within the same
+    // habitat).
     public CreatureResponse createCreature(CreatureRequest req) {
 
         Habitat habitat = habitatRepo.findById(req.habitatId())
@@ -63,6 +66,7 @@ public class CreatureService {
         );
     }
 
+    // Retrieves all creatures sorted by ID and maps them into DTOs.
     public List<CreatureResponse> getAllCreatures() {
         return creatureRepo.findAllByOrderByIdAsc().stream()
                 .map(creature -> new CreatureResponse(
@@ -75,6 +79,7 @@ public class CreatureService {
                 .toList();
     }
 
+    // Retrieves a creature by its ID
     public CreatureResponse getCreatureById(Long id) {
         Creature creature = creatureRepo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Creature not found."));
@@ -88,6 +93,8 @@ public class CreatureService {
         );
     }
 
+    // Permanently deletes a creature from the database.
+    // (Not used in this API since we use soft-delete, but it's here if needed)
     public void deleteCreature(Long id) {
         if (!creatureRepo.existsById(id)) {
             throw new RuntimeException("Creature not found.");
@@ -95,6 +102,7 @@ public class CreatureService {
         creatureRepo.deleteById(id);
     }
 
+    // Updates an existing creature's name, status, and habitat.
     public CreatureResponse updateCreature(Long id, CreatureRequest req) {
         Creature creature = creatureRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Creature not found."));
@@ -117,6 +125,8 @@ public class CreatureService {
         );
     }
 
+    // Renames a creature after validating the new name and enforcing
+    // the uniqueness rule within the same habitat.
     public RenameResponse renameCreature(Long id, String newName) {
 
         Creature creature = creatureRepo.findById(id)
@@ -144,6 +154,8 @@ public class CreatureService {
         );
     }
 
+    // Soft-deletes a creature by marking its status as "Removed".
+    // Prevents deletion if the creature still has an active feeding schedule.
     public Map<String, Object> softDeleteCreature(Long id) {
 
         Creature creature = creatureRepo.findById(id)
@@ -163,6 +175,8 @@ public class CreatureService {
         );
     }
 
+    // Retrieves a creature along with all associated observations,
+    // ordered chronologically.
     public CreatureWithObservationsResponse getCreatureWithObservations(Long id) {
         Creature creature = creatureRepo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Creature not found."));

@@ -8,6 +8,7 @@ public class HttpClientHelper {
     private static final HttpClient client = HttpClient.newHttpClient();
     private static final String BASE_URL = "http://localhost:8080";
 
+    // GET http request
     public static HttpResponse<String> get(String path) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + path))
@@ -17,6 +18,7 @@ public class HttpClientHelper {
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
+    // DELETE http request
     public static HttpResponse<String> delete(String path) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + path))
@@ -26,6 +28,7 @@ public class HttpClientHelper {
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
+    // POST http request
     public static HttpResponse<String> post(String path, String json) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + path))
@@ -36,6 +39,7 @@ public class HttpClientHelper {
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
+    // PUT http request
     public static HttpResponse<String> put(String path, String json) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + path))

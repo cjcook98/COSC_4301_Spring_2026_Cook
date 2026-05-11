@@ -26,6 +26,7 @@ public class Observation {
 
     protected Observation() {}
 
+    // Creates a new observation for a creature.
     public Observation(Creature creature, String author, String note) {
         this.creature = creature;
         this.author = author;

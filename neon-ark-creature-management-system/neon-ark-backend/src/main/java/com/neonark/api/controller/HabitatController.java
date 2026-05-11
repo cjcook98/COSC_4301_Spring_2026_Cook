@@ -19,11 +19,13 @@ public class HabitatController {
         this.service = service;
     }
 
+    // Gets a list of all habitats
     @GetMapping
     public List<Habitat> getAll() {
         return service.getAllHabitats();
     }
 
+    // Creates a new habitat
     @PostMapping
     public Habitat create(@Valid @RequestBody HabitatRequest req) {
         return service.createHabitat(req);

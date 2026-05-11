@@ -20,38 +20,55 @@ public class NeonArkCLI {
                 String choice = scanner.nextLine().trim();
 
                 switch (choice) {
+                    // Lists all creatures
                     case "1" -> {
                         validChoice = true;
                         new ListCreaturesAction().run();
                     }
+
+                    // Views a specific creature with a creature ID
                     case "2" -> {
                         validChoice = true;
                         new ViewCreatureAction(scanner).run();
                     }
+
+                    // Registers a creature using name, habitat id, and status
                     case "3" -> {
                         validChoice = true;
                         new RegisterCreatureAction(scanner).run();
                     }
+
+                    // Renames a creature with a given creature id
                     case "4" -> {
                         validChoice = true;
                         new RenameCreatureAction(scanner).run();
                     }
+
+                    // Removes a creature with a given creature id
                     case "5" -> {
                         validChoice = true;
                         new RemoveCreatureAction(scanner).run();
                     }
+
+                    // Views the observations of a creature with a given creature id
                     case "6" -> {
                         validChoice = true;
                         new ViewObservationsAction(scanner).run();
                     }
+
+                    // Finds all creatures with feeding times at the given time (HH:MM)
                     case "7" -> {
                         validChoice = true;
                         new FindFeedingsAction(scanner).run();
                     }
+
+                    // Views all users
                     case "8" -> {
                         validChoice = true;
                         new ViewUsersAction().run();
                     }
+
+                    // Exit
                     case "0" -> {
                         validChoice = true;
                         if (confirmExit()) {

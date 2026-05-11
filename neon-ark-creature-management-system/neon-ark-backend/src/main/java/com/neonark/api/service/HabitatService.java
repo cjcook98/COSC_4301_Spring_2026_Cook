@@ -16,11 +16,13 @@ public class HabitatService {
         this.habitatRepo = habitatRepo;
     }
 
+    // Creates a new habitat using the provided request data.
     public Habitat createHabitat(HabitatRequest req) {
         Habitat habitat = new Habitat(req.name());
         return habitatRepo.save(habitat);
     }
 
+    // Retrieves all habitats from the database.
     public List<Habitat> getAllHabitats() {
         return habitatRepo.findAll();
     }

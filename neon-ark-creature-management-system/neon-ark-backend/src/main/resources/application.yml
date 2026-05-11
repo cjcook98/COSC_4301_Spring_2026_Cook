@@ -1,25 +1,42 @@
 spring:
   application:
+    # Name of the Spring Boot application
     name: neon-ark-creature-system
 
   datasource:
+    # JDBC connection string for the PostgreSQL database running in Docker
     url: jdbc:postgresql://localhost:5436/neonark_creatures
+
+    # PostgreSQL driver used by Spring Boo
     driver-class-name: org.postgresql.Driver
+
+    # Credentials defined in docker-compose.yml
     username: neonark
     password: neonarkpass
 
   jpa:
+    # Disable automatic schema generation; Flyway manages the schema instead
     generate-ddl: false
+
     hibernate:
+      # Prevent Hibernate from altering the schema (Flyway owns migrations)
       ddl-auto: none
+
+    # Log SQL statements to the console for debugging
     show-sql: true
+
     properties:
       hibernate:
+        # Format SQL output to be more readable
         format_sql: true
 
   flyway:
+    # Enable Flyway database migrations
     enabled: true
+
+    # Location of migration scripts inside src/main/resources
     locations: classpath:db/migration
 
 server:
+  # Port where the backend API will run (http://localhost:8080)
   port: 8080

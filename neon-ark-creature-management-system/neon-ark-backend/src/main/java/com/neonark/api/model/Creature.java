@@ -41,15 +41,16 @@ public class Creature {
         this.habitat = habitat;
     }
 
+    // Getters
     public Long getId() { return id; }
     public String getName() { return name; }
     public CreatureStatus getStatus() { return status; }
     public Habitat getHabitat() { return habitat; }
+    public Instant getCreatedAt() { return createdAt; }
+    public Instant getUpdatedAt() { return updatedAt; }
 
+    // Setters
     public void setName(String name) { this.name = name; }
     public void setStatus(CreatureStatus status) { this.status = status; }
     public void setHabitat(Habitat habitat) { this.habitat = habitat; }
-
-    public Instant getCreatedAt() { return createdAt; }
-    public Instant getUpdatedAt() { return updatedAt; }
 }

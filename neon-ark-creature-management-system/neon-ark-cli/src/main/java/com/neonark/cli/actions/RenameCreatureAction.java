@@ -44,6 +44,7 @@ public class RenameCreatureAction {
 
             int code = response.statusCode();
 
+            // If status code returns OK
             if (code == 200) {
                 JSONObject c = new JSONObject(response.body());
                 System.out.println("\nCreature renamed successfully!");
@@ -53,11 +54,13 @@ public class RenameCreatureAction {
                 return;
             }
 
+            // If status code returns NOT_FOUND
             if (code == 404) {
                 System.out.println("Creature not found.");
                 return;
             }
 
+            // If status code returns BAD_REQUEST or CONFLICT
             if (code == 400 || code == 409) {
                 JSONObject err = new JSONObject(response.body());
                 System.out.println("Error: " + err.getString("error"));

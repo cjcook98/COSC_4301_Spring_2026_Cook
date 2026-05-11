@@ -18,6 +18,7 @@ public class ViewUsersAction {
 
             int code = response.statusCode();
 
+            // If status code returns anything other than OK
             if (code != 200) {
                 System.out.println("Unexpected error: " + response.body());
                 return;
@@ -25,6 +26,7 @@ public class ViewUsersAction {
 
             JSONArray arr = new JSONArray(response.body());
 
+            // Formatting the table
             System.out.println("\nREGISTERED USERS");
             TableFormatter.printSeparator(5);
 

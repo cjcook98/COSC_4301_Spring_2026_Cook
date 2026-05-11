@@ -35,11 +35,13 @@ public class ViewObservationsAction {
 
             int code = response.statusCode();
 
+            // If error code NOT_FOUND is returned for the creature.
             if (code == 404) {
                 System.out.println("Creature not found.");
                 return;
             }
 
+            // If any other error other than NOT_FOUND or OK is returned.
             if (code != 200) {
                 System.out.println("Unexpected error: " + response.body());
                 return;
@@ -47,6 +49,7 @@ public class ViewObservationsAction {
 
             JSONObject c = new JSONObject(response.body());
 
+            // Formatting the table
             System.out.println("\nCREATURE DETAILS");
             TableFormatter.printSeparator(2);
 

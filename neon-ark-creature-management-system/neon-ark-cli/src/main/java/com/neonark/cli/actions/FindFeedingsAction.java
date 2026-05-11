@@ -21,7 +21,7 @@ public class FindFeedingsAction {
         System.out.print("Enter feeding time (HH:MM): ");
         String time = scanner.nextLine().trim();
 
-        // Basic format check
+        // Basic format check for time
         if (!time.matches("^\\d{2}:\\d{2}$")) {
             System.out.println("Invalid time format. Use HH:MM.");
             return;
@@ -33,17 +33,20 @@ public class FindFeedingsAction {
 
             int code = response.statusCode();
 
+            // NOT_FOUND returned if no creatures found for given feeding time.
             if (code == 404) {
                 System.out.println("No creatures found for this feeding time.");
                 return;
             }
 
+            // BAD_REQUEST returned when user gave invalid format.
             if (code == 400) {
                 JSONObject err = new JSONObject(response.body());
                 System.out.println("Error: " + err.getString("error"));
                 return;
             }
 
+            // Any other error other than OK.
             if (code != 200) {
                 System.out.println("Unexpected error: " + response.body());
                 return;
@@ -51,6 +54,7 @@ public class FindFeedingsAction {
 
             JSONArray arr = new JSONArray(response.body());
 
+            // Formatting table
             System.out.println("\nCREATURES FEEDING AT " + time);
             TableFormatter.printSeparator(4);
 

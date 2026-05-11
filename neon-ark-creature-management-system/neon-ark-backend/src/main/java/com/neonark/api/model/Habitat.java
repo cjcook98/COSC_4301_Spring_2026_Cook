@@ -15,6 +15,7 @@ public class Habitat {
 
     public Habitat() {}
 
+    // Creates a new habitat with the given name.
     public Habitat(String name) {
         this.name = name;
     }

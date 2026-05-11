@@ -9,9 +9,11 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.Instant;
 import java.util.Map;
 
+// Global exception handler for the entire API.
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    // Handles ResponseStatusException and converts it into a structured JSON response
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<Map<String, Object>> handle(ResponseStatusException ex) {
 

@@ -22,6 +22,7 @@ public class FeedingSchedule {
 
     protected FeedingSchedule() {}
 
+    // Creates a new feeding schedule entry
     public FeedingSchedule(Creature creature, LocalTime feedTime) {
         this.creature = creature;
         this.feedTime = feedTime;

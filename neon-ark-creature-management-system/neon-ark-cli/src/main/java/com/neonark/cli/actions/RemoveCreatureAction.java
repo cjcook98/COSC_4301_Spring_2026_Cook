@@ -19,6 +19,7 @@ public class RemoveCreatureAction {
         System.out.print("Enter creature ID: ");
         String idInput = scanner.nextLine().trim();
 
+        // Validating numeric input
         if (!idInput.matches("\\d+")) {
             System.out.println("Invalid ID. Must be numeric.");
             return;
@@ -32,6 +33,7 @@ public class RemoveCreatureAction {
 
             int code = response.statusCode();
 
+            // If status code is OK
             if (code == 200) {
                 JSONObject json = new JSONObject(response.body());
                 System.out.println("\nCreature removed successfully!");
@@ -41,11 +43,13 @@ public class RemoveCreatureAction {
                 return;
             }
 
+            // If status code returns NOT_FOUND
             if (code == 404) {
                 System.out.println("Creature not found.");
                 return;
             }
 
+            // If status code returns CONFLICT
             if (code == 409) {
                 JSONObject err = new JSONObject(response.body());
                 System.out.println("Error: " + err.getString("error"));

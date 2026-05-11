@@ -23,6 +23,7 @@ public class User {
 
     protected User() {}
 
+    // Creates a new user with the given details.
     public User(String fullName, String email, String phone, String role) {
         this.fullName = fullName;
         this.email = email;

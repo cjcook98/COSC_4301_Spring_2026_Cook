@@ -16,6 +16,7 @@ public class AdminController {
         this.service = service;
     }
 
+    // Gets a list of all users in the system
     @GetMapping
     public List<UserResponse> getAllUsers() {
         return service.getAllUsers();

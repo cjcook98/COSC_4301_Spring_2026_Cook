@@ -13,6 +13,7 @@ public class ListCreaturesAction {
         try {
             var response = HttpClientHelper.get("/api/creatures");
 
+            // Any other error besides OK.
             if (response.statusCode() != 200) {
                 System.out.println("Error: " + response.body());
                 return;
@@ -20,11 +21,13 @@ public class ListCreaturesAction {
 
             JSONArray arr = new JSONArray(response.body());
 
+            // If the array of creatures is empty, returns "No creatures found".
             if (arr.isEmpty()) {
                 System.out.println("No creatures found.");
                 return;
             }
 
+            // Formatting table.
             TableFormatter.printRow(List.of("ID", "Name", "Status", "Habitat"));
             TableFormatter.printSeparator(4);
 

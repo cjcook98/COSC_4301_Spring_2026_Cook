@@ -15,6 +15,8 @@ public class AdminService {
         this.userRepo = userRepo;
     }
 
+    // Retrieves all users from the database and converts them into
+    // UserResponse DTOs
     public List<UserResponse> getAllUsers() {
         return userRepo.findAll().stream()
                 .map(u -> new UserResponse(

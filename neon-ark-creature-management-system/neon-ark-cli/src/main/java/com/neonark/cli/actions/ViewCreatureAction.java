@@ -32,11 +32,13 @@ public class ViewCreatureAction {
         try {
             HttpResponse<String> response = HttpClientHelper.get("/api/creatures/" + id);
 
+            // If the status code returns NOT_FOUND for the creature.
             if (response.statusCode() == 404) {
                 System.out.println("Creature not found.");
                 return;
             }
 
+            // Any other status code other than NOT_FOUND and OK
             if (response.statusCode() != 200) {
                 System.out.println("Error: " + response.body());
                 return;
@@ -44,6 +46,7 @@ public class ViewCreatureAction {
 
             JSONObject c = new JSONObject(response.body());
 
+            // Formatting for the table
             System.out.println("\nCREATURE DETAILS");
             TableFormatter.printSeparator(2);
 
