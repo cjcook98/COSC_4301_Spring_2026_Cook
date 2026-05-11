@@ -19,14 +19,22 @@ public class RegisterCreatureAction {
         System.out.print("Enter creature name: ");
         String name = scanner.nextLine().trim();
 
+        // Validating that name is not blank.
         if (name.isBlank()) {
             System.out.println("Name cannot be blank.");
+            return;
+        }
+
+        // Validating that name is a string.
+        if (!name.matches("^[A-Za-z ]+$")) {
+            System.out.println("Invalid name. Only letters and spaces allow.");
             return;
         }
 
         System.out.print("Enter habitat ID: " );
         String habitatInput = scanner.nextLine().trim();
 
+        // Validating that habitat id is numeric.
         if (!habitatInput.matches("\\d+")) {
             System.out.println("Invalid habitat ID. Must be numeric.");
             return;
@@ -37,6 +45,7 @@ public class RegisterCreatureAction {
         System.out.print("Enter status (Healthy, Injured, Critical, Removed): ");
         String status = scanner.nextLine().trim();
 
+        // Validating that status is not blank.
         if (status.isBlank()) {
             System.out.println("Status cannot be blank.");
             return;
@@ -54,6 +63,7 @@ public class RegisterCreatureAction {
 
             int code = response.statusCode();
 
+            // If code returns OK or CREATED, which are both good status code returns.
             if (code == 200 || code == 201) {
                 JSONObject c = new JSONObject(response.body());
                 System.out.println("\nCreature registered successfully!");
@@ -64,7 +74,7 @@ public class RegisterCreatureAction {
                 return;
             }
 
-            // Handle backend validation errors
+            // Handle backend validation errors BAD_REQUEST and CONFLICT
             if (code == 400 || code == 409) {
                 JSONObject err = new JSONObject(response.body());
                 System.out.println("Error: " + err.getString("error"));
